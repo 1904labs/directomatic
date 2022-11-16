@@ -9,6 +9,7 @@ export interface RedirectProps {
   code: RedirectCode;
   localized: boolean;
   deleted: boolean;
+  description: string;
 }
 
 /**
@@ -20,6 +21,7 @@ export interface RawRedirectProps {
   code?: string | number;
   localized?: string | boolean;
   deleted?: string | boolean;
+  description?: string;
 }
 
 /**
@@ -56,7 +58,7 @@ export interface BulkRedirectListItem {
 /**
  * The actual redirect rule formatted for the Rules List API. Source and dest
  * must both be complete URLs and the status code must be one of the allowable
- * HTTP 3xx response codes. Nothing else is stored at the row-level on Dash.
+ * HTTP 3xx response codes. Nothing else is stored at the row-level.
  */
 export interface BulkRedirectListItemDetails {
   source_url: string;

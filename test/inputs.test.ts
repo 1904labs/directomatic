@@ -5,7 +5,7 @@ setupGlobal();
 
 describe('inputs', () => {
   const expectedLookup =
-    'https://example.org/keymaster/values/Redirects!A:E?key=gozarian&valueRenderOption=UNFORMATTED_VALUE';
+    'https://example.org/keymaster/values/Redirects!A:F?key=gozarian&valueRenderOption=UNFORMATTED_VALUE';
 
   beforeEach(() => {
     fetchMock.resetMocks();

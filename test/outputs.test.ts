@@ -40,6 +40,7 @@ describe('outputs', () => {
         code: 301,
         localized: false,
         deleted: false,
+        description: 'home job',
       };
       const two: RedirectProps = {
         source: 'https://work.com',
@@ -47,6 +48,7 @@ describe('outputs', () => {
         code: 302,
         localized: false,
         deleted: true,
+        description: 'write home',
       };
       const three: RedirectProps = {
         source: 'http://play.fun',
@@ -54,6 +56,7 @@ describe('outputs', () => {
         code: 307,
         localized: false,
         deleted: false,
+        description: 'phone game',
       };
 
       const inputList: RedirectProps[] = [one, two, three];
@@ -89,6 +92,7 @@ describe('outputs', () => {
         code: 302,
         localized: true,
         deleted: false,
+        description: 'gameplay',
       };
       const inputList: RedirectProps[] = [localizeThis];
       const response = makeBulkList(inputList);
@@ -126,6 +130,7 @@ describe('outputs', () => {
         code: 308,
         localized: true,
         deleted: false,
+        description: 'play again',
       };
       const inputList: RedirectProps[] = [localizeThis];
       const response = makeBulkList(inputList);
@@ -533,7 +538,7 @@ describe('outputs', () => {
       });
       expect(response).toBeDefined();
       expect(response).toMatchObject({
-        success: undefined, // This is current behavior, might be better as false
+        success: false,
         errors: [],
         messages: ['Cloudflare API provided operation ID undefined'],
         invalidRules: [],

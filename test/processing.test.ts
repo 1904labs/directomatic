@@ -45,7 +45,7 @@ describe('processing', () => {
       expect(result?.source).toEqual('/work');
       expect(result?.destination).toEqual('/play');
       expect(result?.code).toEqual(302);
-      expect(result?.localized).toEqual(true);
+      expect(result?.localized).toEqual(false);
       expect(result?.deleted).toEqual(false);
     });
 
@@ -127,7 +127,7 @@ describe('processing', () => {
       expect(result?.source).toEqual('/dull');
       expect(result?.destination).toEqual('/sheen');
       expect(result?.code).toEqual(302);
-      expect(result?.localized).toEqual(true);
+      expect(result?.localized).toEqual(false);
       expect(result?.deleted).toEqual(false);
     });
 

@@ -1,7 +1,8 @@
 import { DirectomaticResponse, RawRedirectProps } from './types';
 
+// A:F gets the first five columns!
 const lookup = (): string =>
-  `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
+  `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:F?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
 
 /**
  * Check that the Google Sheet in configuration is reachable and see if it has
