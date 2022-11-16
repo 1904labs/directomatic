@@ -14,7 +14,7 @@ export const validatePath = (input: string): string => {
   if (input.match(/^(\/|https?:\/\/)/)) {
     return input;
   } else {
-    throw `Bad path "${input}". Skipping.`;
+    throw new Error(`Bad path "${input}". Skipping.`);
   }
 };
 
