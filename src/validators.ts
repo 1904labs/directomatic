@@ -34,9 +34,9 @@ export const validateBoolean = (
     return preferred;
   }
   const test = input.toString().toLowerCase();
-  if (['y', '1', 'yes', 'true'].includes(test)) {
+  if (['y', '1', 't', 'yes', 'true'].includes(test)) {
     return true;
-  } else if (['n', '0', 'no', 'false'].includes(test)) {
+  } else if (['n', '0', 'f', 'no', 'false'].includes(test)) {
     return false;
   } else {
     return preferred;
