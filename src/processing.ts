@@ -1,5 +1,4 @@
-import { RawRedirectProps, RedirectProps } from '.';
-import { BulkRedirectListItem } from './outputs';
+import { RawRedirectProps, RedirectProps, BulkRedirectListItem } from './types';
 import { validateBoolean, validatePath, validateCode } from './validators';
 
 /**

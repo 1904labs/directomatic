@@ -1,4 +1,4 @@
-import { DirectomaticResponse, RawRedirectProps } from '.';
+import { DirectomaticResponse, RawRedirectProps } from './types';
 
 const lookup = `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
 

@@ -1,4 +1,4 @@
-import { RedirectCode } from '.';
+import { RedirectCode } from './types';
 
 /**
  * Check that a path is either a full URL with a schema or a root-relative path.

@@ -1,24 +1,10 @@
-declare global {
-  // In wrangler.toml
-  const GSHEETS_API_ENDPOINT: string;
-  const CF_API_ENDPOINT: string;
-  const DEFAULT_DEST_DOMAIN: string;
-
-  // In secrets
-  const AUTH_TOKEN: string;
-  const GSHEETS_ID: string;
-  const GSHEETS_API_KEY: string;
-  const CF_ACCT_ID: string; // Really, account TAG
-  const CF_LIST_ID: string;
-  const CF_API_TOKEN: string;
-}
-
 import { Router } from 'itty-router';
 
+import './globals';
+import { RawRedirectProps } from './types';
 import { checkSpreadsheetStatus, fetchRedirectRows } from './inputs';
 import { processSheetRow, ruleInList } from './processing';
 import {
-  BulkRedirectListItem,
   getBulkListContents,
   getBulkListStatus,
   makeBulkList,
@@ -26,67 +12,6 @@ import {
 } from './outputs';
 import { validateBoolean } from './validators';
 import { authCheck } from './auth';
-
-export type RedirectCode = 301 | 302 | 307 | 308;
-
-/**
- * A validated and sanitized redirect object.
- */
-export interface RedirectProps {
-  source: string;
-  destination: string;
-  code: RedirectCode;
-  localized: boolean;
-  deleted: boolean;
-}
-
-/**
- * A raw spreadsheet row that could be a redirect object.
- */
-export interface RawRedirectProps {
-  source: string;
-  destination: string;
-  code?: string | number;
-  localized?: string | boolean;
-  deleted?: string | boolean;
-}
-
-/**
- * Work-in-progress, but all responses from this service will be one of these.
- */
-export interface DirectomaticResponse {
-  success?: boolean; // If an action was requested
-  errors?: any[]; // Error messages either from CF or from this code
-  messages?: any[]; // This would be from the CF API
-  inputRules?: RedirectProps[];
-  invalidRules?: BulkRedirectListItem[] | RawRedirectProps[];
-}
-
-// @TODO: Full listing for cf.com but this should be configurable. Move to env var?
-export const Locales = [
-  'de-de',
-  'en-au',
-  'en-ca',
-  'en-gb',
-  'en-in',
-  'en-us',
-  'es-es',
-  'fr-fr',
-  'id-id',
-  'it-it',
-  'ja-jp',
-  'ko-kr',
-  'nl-nl',
-  'pt-br',
-  'ru-ru',
-  'sv-se',
-  'th-th',
-  'tr-tr',
-  'vi-vn',
-  'zh-cn',
-  'zh-hans-cn',
-  'zh-tw',
-];
 
 const router = Router();
 

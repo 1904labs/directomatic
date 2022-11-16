@@ -1,36 +1,6 @@
-import { DirectomaticResponse, Locales, RedirectCode, RedirectProps } from '.';
+import { Locales } from './globals';
+import { DirectomaticResponse, RedirectProps, BulkRedirectListItem } from './types';
 import { makeFullURL } from './processing';
-
-/**
- * Key properties of the rule list itself.
- */
-export interface BulkRedirectList {
-  name: string;
-  description: string;
-  kind: 'redirect';
-}
-
-/**
- * The Rules List API refers to an array of [{ redirect: theRedirectObj }, ...]
- * entries with some metadata we don't track but need to keep nested properly.
- */
-export interface BulkRedirectListItem {
-  id?: string;
-  redirect: BulkRedirectListItemDetails;
-  created_on?: string;
-  modified_on?: string;
-}
-
-/**
- * The actual redirect rule formatted for the Rules List API. Source and dest
- * must both be complete URLs and the status code must be one of the allowable
- * HTTP 3xx response codes. Nothing else is stored at the row-level on Dash.
- */
-export interface BulkRedirectListItemDetails {
-  source_url: string;
-  target_url: string;
-  status_code: RedirectCode;
-}
 
 // For the list metadata
 const listApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}`;
@@ -38,13 +8,7 @@ const listApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST
 // To the redirects contained in that list
 const listItemsApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}/items`;
 
-export interface BulkUploadReport {
-  success: boolean;
-  operation_id?: string;
-  errors: any[];
-  messages: any[];
-  invalid_rules: BulkRedirectListItem[];
-}
+};
 
 /**
  * Take the list of redirect rows, add the destination domain, make an item for
