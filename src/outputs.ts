@@ -18,6 +18,8 @@ const listItemsApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF
  * @returns (BulkRedirectListItem[]) Raw redirect list entries for a CF Bulk Redirect List
  */
 export const makeBulkList = (input: RedirectProps[]): BulkRedirectListItem[] => {
+  const default_locale = DEFAULT_LOCALE || 'en-US'; // assume en-US
+  const collator = new Intl.Collator(default_locale, { sensitivity: 'base' });
   return input.flatMap((row) => {
     const list = [
       {
@@ -30,8 +32,8 @@ export const makeBulkList = (input: RedirectProps[]): BulkRedirectListItem[] => 
     // Add in locale-prefixed paths for localized redirects.
     if (row.localized) {
       for (const locale of Locales) {
-        // We don't use en-us as a locale prefix on Marketing Site.
-        if (locale === 'en-us') {
+        // Do not emit localized versions for the default locale
+        if (collator.compare(locale, default_locale) === 0) {
           continue;
         }
 
