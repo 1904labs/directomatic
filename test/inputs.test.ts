@@ -43,7 +43,7 @@ describe('inputs', () => {
       expect(response).toBeDefined();
       expect(response.success).toEqual(true);
       expect(response.errors).toHaveLength(0);
-      const messages = response.messages || [];
+      const messages = response.messages ?? [];
       expect(messages).toHaveLength(2);
       expect(messages[0]).toContain('contains no rows');
       expect(messages[1]).toContain(
@@ -64,7 +64,7 @@ describe('inputs', () => {
       expect(response).toBeDefined();
       expect(response.success).toEqual(true);
       expect(response.errors).toHaveLength(0);
-      const messages = response.messages || [];
+      const messages = response.messages ?? [];
       expect(messages).toHaveLength(2);
       expect(messages[0]).toContain('contains 1 total rows');
       expect(messages[1]).toContain(
@@ -81,10 +81,10 @@ describe('inputs', () => {
       const response = await checkSpreadsheetStatus();
       expect(response).toBeDefined();
       expect(response.success).toEqual(false);
-      const errors = response.errors || [];
+      const errors = response.errors ?? [];
       expect(errors).toHaveLength(1);
       expect(errors[0]).toEqual('Google Sheet API returned 301, FOUND');
-      const messages = response.messages || [];
+      const messages = response.messages ?? [];
       expect(messages).toHaveLength(2);
       expect(messages[0]).toContain('contains no rows');
       expect(messages[1]).toContain(

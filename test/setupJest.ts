@@ -31,7 +31,7 @@ const pushLocale = (newLocale: string | null): string => {
 };
 
 const popLocale = (): string => {
-  const previousLocale: string = localeStack.pop() || '';
+  const previousLocale: string = localeStack.pop() ?? '';
   global.DEFAULT_LOCALE = previousLocale;
   return previousLocale;
 };

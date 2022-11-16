@@ -20,7 +20,7 @@ const listItemsApi = (): string => {
  * @returns (BulkRedirectListItem[]) Raw redirect list entries for a CF Bulk Redirect List
  */
 export const makeBulkList = (input: RedirectProps[]): BulkRedirectListItem[] => {
-  const default_locale = DEFAULT_LOCALE || 'en-US'; // assume en-US
+  const default_locale = DEFAULT_LOCALE ?? 'en-US'; // assume en-US
   const collator = new Intl.Collator(default_locale, { sensitivity: 'base' });
   return input.flatMap((row) => {
     const list = [
@@ -114,9 +114,9 @@ export const uploadBulkList = async (
   }).then((res) => res.json());
 
   const report: DirectomaticResponse = {
-    success: response?.success,
-    errors: response?.errors || [],
-    messages: response?.messages || [],
+    success: response?.success ?? false,
+    errors: response?.errors ?? [],
+    messages: response?.messages ?? [],
     invalidRules: [],
   };
 

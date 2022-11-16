@@ -18,7 +18,7 @@ describe('authCheck', () => {
     expect(response?.headers?.get('Content-Type')).toEqual('text/json');
     const text = await response?.text();
     expect(text).toBeDefined();
-    const reply = JSON.parse(text || '');
+    const reply = JSON.parse(text ?? '');
     expect(reply).toBeDefined();
     expect(reply).toMatchObject({
       success: false,
@@ -37,7 +37,7 @@ describe('authCheck', () => {
     expect(response?.headers?.get('Content-Type')).toEqual('text/json');
     const text = await response?.text();
     expect(text).toBeDefined();
-    const reply = JSON.parse(text || '');
+    const reply = JSON.parse(text ?? '');
     expect(reply).toBeDefined();
     expect(reply).toMatchObject({
       success: false,
