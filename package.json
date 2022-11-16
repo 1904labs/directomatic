@@ -3,11 +3,14 @@
   "version": "1.1.0-rc",
   "description": "Redirect Generator and Transformer Robot",
   "main": "dist/worker.js",
+  
   "scripts": {
     "build": "webpack",
     "format": "prettier --write  '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
     "lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
-    "test": "jest --config jestconfig.json --verbose"
+    "test": "jest --config jestconfig.json --verbose",
+    "start": "wrangler dev",
+    "deploy": "wrangler publish"
   },
   "author": "Taylor Smith <tsmith@cloudflare.com>",
   "license": "Internal Use Only",
