@@ -47,12 +47,12 @@ export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
       const rows = payload.values;
 
       // Shift the first row (headers) off, and then pull key names from it.
-      // Header cells are all formatted "[key]: Descpription (Acceptable Value)"
+      // Header cells are all formatted "[key]: Description (Acceptable Value)"
       const headers = payload.values
         .shift()
         .map((header: string) => header.replace(/:.+/, ''));
 
-      // Take the array of rows and turn 'em into key:value objects and return
+      // Take the array of rows and turn them into key:value objects and return
       return rows.map((row: any) => mergeHeaders(headers, row));
     });
 };
