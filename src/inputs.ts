@@ -39,7 +39,7 @@ export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
   return await fetch(lookup)
     .then((response) => response.json())
     .then((payload: any) => {
-      if (payload.values?.length < 0) {
+      if (payload.values?.length < 1) {
         throw new Error('Google Sheets API did not return any rows.');
       }
 
