@@ -45,6 +45,9 @@
     "resetMocks": false,
     "setupFiles": [
       "./test/setupJest.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "./src/index.ts"
     ]
   }
 }
