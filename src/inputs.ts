@@ -1,6 +1,7 @@
 import { DirectomaticResponse, RawRedirectProps } from './types';
 
-const lookup = `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
+const lookup = (): string =>
+  `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
 
 /**
  * Check that the Google Sheet in configuration is reachable and see if it has
@@ -9,7 +10,7 @@ const lookup = `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=$
  * @returns (Promise<DirectomaticResponse>) Status information
  */
 export const checkSpreadsheetStatus = async (): Promise<DirectomaticResponse> => {
-  const response = await fetch(lookup);
+  const response = await fetch(lookup());
   const payload: any = await response.json();
 
   const result: DirectomaticResponse = {
@@ -36,7 +37,7 @@ export const checkSpreadsheetStatus = async (): Promise<DirectomaticResponse> =>
  * @returns (Promise of RawRedirectProps[]) An array of raw redirect entries.
  */
 export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
-  return await fetch(lookup)
+  return fetch(lookup())
     .then((response) => response.json())
     .then((payload: any) => {
       if (payload.values?.length < 1) {
@@ -64,7 +65,7 @@ export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
  * @param row (any[]) the values
  * @returns (object) of {headers[0]: row[0], ... }
  */
-const mergeHeaders = (headers: string[], row: any[]) => {
+export const mergeHeaders: any = (headers: string[], row: any[]) => {
   const entries = [];
 
   for (let i = 0; i < headers.length; i++) {

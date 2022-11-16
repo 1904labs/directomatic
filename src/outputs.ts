@@ -1,13 +1,15 @@
-import { Locales } from './globals';
 import { DirectomaticResponse, RedirectProps, BulkRedirectListItem } from './types';
+import { Locales } from './globals';
 import { makeFullURL } from './processing';
 
 // For the list metadata
-const listApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}`;
+const listApi = (): string => {
+  return `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}`;
+};
 
 // To the redirects contained in that list
-const listItemsApi = `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}/items`;
-
+const listItemsApi = (): string => {
+  return `${CF_API_ENDPOINT}/accounts/${CF_ACCT_ID}/rules/lists/${CF_LIST_ID}/items`;
 };
 
 /**
@@ -59,7 +61,7 @@ export const makeBulkList = (input: RedirectProps[]): BulkRedirectListItem[] => 
  * @returns (Promise<DirectomaticResponse>) Status information
  */
 export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
-  const response = await fetch(listApi, {
+  const response = await fetch(listApi(), {
     method: 'GET',
     headers: {
       'content-type': 'application/json',
@@ -102,7 +104,7 @@ export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
 export const uploadBulkList = async (
   list: BulkRedirectListItem[]
 ): Promise<DirectomaticResponse> => {
-  const response: any = await fetch(listItemsApi, {
+  const response: any = await fetch(listItemsApi(), {
     method: 'PUT',
     headers: {
       'content-type': 'application/json',
@@ -132,7 +134,7 @@ export const uploadBulkList = async (
       `Cloudflare API provided operation ID ${response.result?.operation_id}`
     );
 
-    await fetch(listApi, {
+    await fetch(listApi(), {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
@@ -151,7 +153,7 @@ export const uploadBulkList = async (
  * @returns (Promise<BulkRedirectListItem[]>) Published redirect list rules
  */
 export const getBulkListContents = async (): Promise<BulkRedirectListItem[]> => {
-  const response = await fetch(listItemsApi, {
+  const response = await fetch(listItemsApi(), {
     method: 'GET',
     headers: {
       authorization: `Bearer ${CF_API_TOKEN}`,
