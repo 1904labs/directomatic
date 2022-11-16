@@ -30,9 +30,7 @@ export const validateBoolean = (
   input: string | boolean | undefined,
   preferred: boolean
 ): boolean => {
-  if (typeof input === 'undefined') {
-    return preferred;
-  } else if (typeof input === 'string' && input.length === 0) {
+  if (typeof input === 'undefined' || (typeof input === 'string' && input.length === 0)) {
     return preferred;
   }
   const test = input.toString().toLowerCase();

@@ -66,14 +66,13 @@ export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
   });
 
   const payload: any = await response.json();
-
   const messages = [
     `Cloudflare Rules List URL https://dash.cloudflare.com/${CF_ACCT_ID}/configurations/lists/${CF_LIST_ID}`,
   ];
 
   if (payload?.result) {
     messages.push(
-      `Cloudflare list ${payload.result?.name} contains ${payload.result?.num_items} rules.`
+      `Cloudflare list ${payload.result?.name} contains ${payload.result?.num_items} rules and referenced by ${payload.result?.num_referencing_filters} filters.`
     );
     messages.push(`Cloudflare list description: ${payload.result?.description}`);
   }
@@ -88,7 +87,6 @@ export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
         ].flat(),
     messages: [messages, payload.messages].flat(),
   };
-
   return result;
 };
 
@@ -112,7 +110,7 @@ export const uploadBulkList = async (
   }).then((res) => res.json());
 
   const report: DirectomaticResponse = {
-    success: response?.success || false,
+    success: response?.success,
     errors: response?.errors || [],
     messages: response?.messages || [],
     invalidRules: [],
@@ -129,7 +127,7 @@ export const uploadBulkList = async (
   // No errors on upload, update the description with the name of this app + date
   else {
     report.messages?.push(
-      `Cloudflare API provided operation ID ${response.result.operation_id}`
+      `Cloudflare API provided operation ID ${response.result?.operation_id}`
     );
 
     await fetch(listApi, {
