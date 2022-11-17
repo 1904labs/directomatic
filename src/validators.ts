@@ -1,4 +1,4 @@
-import { RedirectCode } from '.';
+import { RedirectCode } from './types';
 
 /**
  * Check that a path is either a full URL with a schema or a root-relative path.
@@ -14,7 +14,7 @@ export const validatePath = (input: string): string => {
   if (input.match(/^(\/|https?:\/\/)/)) {
     return input;
   } else {
-    throw `Bad path "${input}". Skipping.`;
+    throw new Error(`Bad path "${input}". Skipping.`);
   }
 };
 
@@ -30,15 +30,13 @@ export const validateBoolean = (
   input: string | boolean | undefined,
   preferred: boolean
 ): boolean => {
-  if (typeof input === 'undefined') {
-    return preferred;
-  } else if (typeof input === 'string' && input.length === 0) {
+  if (typeof input === 'undefined' || (typeof input === 'string' && input.length === 0)) {
     return preferred;
   }
   const test = input.toString().toLowerCase();
-  if (['y', '1', 'yes', 'true'].includes(test)) {
+  if (['y', '1', 't', 'yes', 'true'].includes(test)) {
     return true;
-  } else if (['n', '0', 'no', 'false'].includes(test)) {
+  } else if (['n', '0', 'f', 'no', 'false'].includes(test)) {
     return false;
   } else {
     return preferred;

@@ -1,6 +1,8 @@
-import { DirectomaticResponse, RawRedirectProps } from '.';
+import { DirectomaticResponse, RawRedirectProps } from './types';
 
-const lookup = `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
+// A:F gets the first five columns!
+const lookup = (): string =>
+  `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:F?key=${GSHEETS_API_KEY}&valueRenderOption=UNFORMATTED_VALUE`;
 
 /**
  * Check that the Google Sheet in configuration is reachable and see if it has
@@ -9,7 +11,7 @@ const lookup = `${GSHEETS_API_ENDPOINT}/${GSHEETS_ID}/values/Redirects!A:E?key=$
  * @returns (Promise<DirectomaticResponse>) Status information
  */
 export const checkSpreadsheetStatus = async (): Promise<DirectomaticResponse> => {
-  const response = await fetch(lookup);
+  const response = await fetch(lookup());
   const payload: any = await response.json();
 
   const result: DirectomaticResponse = {
@@ -36,10 +38,10 @@ export const checkSpreadsheetStatus = async (): Promise<DirectomaticResponse> =>
  * @returns (Promise of RawRedirectProps[]) An array of raw redirect entries.
  */
 export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
-  return await fetch(lookup)
+  return fetch(lookup())
     .then((response) => response.json())
     .then((payload: any) => {
-      if (payload.values?.length < 0) {
+      if (payload.values?.length < 1) {
         throw new Error('Google Sheets API did not return any rows.');
       }
 
@@ -47,12 +49,12 @@ export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
       const rows = payload.values;
 
       // Shift the first row (headers) off, and then pull key names from it.
-      // Header cells are all formatted "[key]: Descpription (Acceptable Value)"
+      // Header cells are all formatted "[key]: Description (Acceptable Value)"
       const headers = payload.values
         .shift()
         .map((header: string) => header.replace(/:.+/, ''));
 
-      // Take the array of rows and turn 'em into key:value objects and return
+      // Take the array of rows and turn them into key:value objects and return
       return rows.map((row: any) => mergeHeaders(headers, row));
     });
 };
@@ -64,7 +66,7 @@ export const fetchRedirectRows = async (): Promise<RawRedirectProps[]> => {
  * @param row (any[]) the values
  * @returns (object) of {headers[0]: row[0], ... }
  */
-const mergeHeaders = (headers: string[], row: any[]) => {
+export const mergeHeaders: any = (headers: string[], row: any[]) => {
   const entries = [];
 
   for (let i = 0; i < headers.length; i++) {

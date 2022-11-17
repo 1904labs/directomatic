@@ -1,5 +1,4 @@
-import { RawRedirectProps, RedirectProps } from '.';
-import { BulkRedirectListItem } from './outputs';
+import { RawRedirectProps, RedirectProps, BulkRedirectListItem } from './types';
 import { validateBoolean, validatePath, validateCode } from './validators';
 
 /**
@@ -18,9 +17,10 @@ export const processSheetRow = (input: RawRedirectProps): RedirectProps | null =
     redirect = {
       source: validatePath(input.source),
       destination: validatePath(input.destination),
-      code: validateCode(input.code, 302),
-      localized: validateBoolean(input.localized, true),
-      deleted: validateBoolean(input.deleted, false),
+      code: validateCode(input?.code, 302),
+      localized: validateBoolean(input?.localized, false),
+      deleted: validateBoolean(input?.deleted, false),
+      description: input?.description ?? '',
     };
   } catch {
     console.log(`Redirect from ${input?.source} to ${input?.destination} is invalid.`);

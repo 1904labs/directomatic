@@ -1,18 +1,13 @@
 name = "directomatic"
-type = "javascript"
-zone_id = ""
-account_id = ""
-route = ""
 workers_dev = true
-compatibility_date = "2022-01-28"
+main = "src/index.ts"
+compatibility_date = "2022-10-31"
 
 [build]
 command = "npm install && npm run build"
-[build.upload]
-format = "service-worker"
-
 
 [vars]
 GSHEETS_API_ENDPOINT = "https://sheets.googleapis.com/v4/spreadsheets"
 CF_API_ENDPOINT = "https://api.cloudflare.com/client/v4"
 DEFAULT_DEST_DOMAIN = "https://www.cloudflare.com"
+DEFAULT_LOCALE = "en-US"
