@@ -46,8 +46,8 @@ describe('inputs', () => {
       const messages = response.messages ?? [];
       expect(messages).toHaveLength(2);
       expect(messages[0]).toContain('contains no rows');
-      expect(messages[1]).toContain(
-        `URL https://docs.google.com/spreadsheets/d/${GSHEETS_ID}/edit`
+      expect(messages[1]).toEqual(
+        'Google Sheet URL https://docs.google.com/spreadsheets/d/keymaster/edit'
       );
     });
 
