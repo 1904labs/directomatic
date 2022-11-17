@@ -102,15 +102,11 @@ export const diff = async (): Promise<Response> => {
   return new Response(
     JSON.stringify({
       messages: [
-        [
           `There are ${addedRules.length} rules to add (in spreadsheet but not published).`,
-        ],
-        [
           `There are ${removedRules.length} rules to remove (published but not in spreadsheet).`,
         ],
-        { addedRules },
-        { removedRules },
-      ],
+        addedRules: addedRules,
+        removedRules: removedRules,
     }),
     {
       headers: { 'content-type': 'application/json' },
