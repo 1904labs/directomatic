@@ -6,15 +6,15 @@ import { hello, status, list, diff, publish } from './controller';
 
 const router = Router();
 
-// Require a bearer token for any request.
-router.all('*', authCheck);
-
 /**
  * GET /
  *
  * Hello World!
  */
 router.get('/', hello);
+
+// Require a bearer token for any other request.
+router.all('*', authCheck);
 
 /**
  * GET /status
