@@ -86,9 +86,9 @@ export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
     errors: response.ok
       ? payload.errors
       : [
-          `Cloudflare API returned ${response.status}, ${response.statusText}`,
-          payload.errors,
-        ].flat(),
+        `Cloudflare API returned ${response.status}, ${response.statusText}`,
+        payload.errors,
+      ].flat(),
     messages: [messages, payload.messages].flat(),
   };
   return result;
@@ -132,7 +132,7 @@ export const uploadBulkList = async (
       return list[e?.source?.parameter_value_index] || e;
     });
   } else {
-  // No errors on upload, update the description with the name of this app + date
+    // No errors on upload, update the description with the name of this app + date
     report.messages?.push(
       `Cloudflare API provided operation ID ${response.result?.operation_id}`
     );
@@ -156,18 +156,36 @@ export const uploadBulkList = async (
  * @returns (Promise<BulkRedirectListItem[]>) Published redirect list rules
  */
 export const getBulkListContents = async (): Promise<BulkRedirectListItem[]> => {
-  const response = await fetch(listItemsApi(), {
-    method: 'GET',
-    headers: {
-      authorization: `Bearer ${CF_API_TOKEN}`,
-    },
-  });
+  const list: BulkRedirectListItem[] = [];
+  const uri = listItemsApi();
+  let cursor = '';
 
-  const payload: any = await response.json();
+  do {
+    const response = await fetch(uri + cursor, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${CF_API_TOKEN}`,
+      },
+    });
 
-  if (payload?.success && payload?.result?.length) {
-    return payload.result as BulkRedirectListItem[];
-  }
+    const payload: any = await response.json();
 
-  return [];
+    if (payload?.success) {
+      const page = payload?.result as BulkRedirectListItem[];
+
+      if (page?.length) {
+        page.forEach(item => list.push(item));
+      }
+
+      const after = payload?.result_info?.cursors?.after || '';
+
+      if (after !== '') {
+        cursor = `?cursor=${after}`;
+      }
+      else break;
+    }
+    else break;
+  } while (cursor !== '');
+
+  return list;
 };
