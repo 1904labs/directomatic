@@ -17,15 +17,12 @@ describe('validators', () => {
       const result = validatePath('http://example.org');
       expect(result).toEqual('http://example.org');
     });
-    test('valid http path works', () => {
+    test('valid https path works', () => {
       const result = validatePath('https://example.org');
       expect(result).toEqual('https://example.org');
     });
     test('blank throws as expected', () => {
       expect(() => validatePath('')).toThrow('Bad path "". Skipping');
-    });
-    test('invalid path throws as expected', () => {
-      expect(() => validatePath('HI MOM')).toThrow('Bad path "HI MOM". Skipping');
     });
   });
 

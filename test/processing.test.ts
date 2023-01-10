@@ -75,7 +75,7 @@ describe('processing', () => {
 
     test('bad source returns null', () => {
       const input: RawRedirectProps = {
-        source: 'NOT A URL',
+        source: '',
         destination: '/sheen',
         code: 301,
         localized: false,
@@ -88,7 +88,7 @@ describe('processing', () => {
     test('bad destination returns null', () => {
       const input: RawRedirectProps = {
         source: '/',
-        destination: '42',
+        destination: '',
         code: 301,
         localized: false,
         deleted: false,

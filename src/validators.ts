@@ -9,10 +9,9 @@ import { RedirectCode } from './types';
  * @returns (string) original input if it is valid
  */
 export const validatePath = (input: string): string => {
-  // @TODO: Need to do better verification of URI paths here. This makes sure
-  // that the path either starts with a slash or a schema.
-  if (input.match(/^(\/|https?:\/\/)/)) {
-    return input;
+  // The only validation we want todo here non-blanks 
+  if (input.length) {
+    return input.trim();
   } else {
     throw new Error(`Bad path "${input}". Skipping.`);
   }
