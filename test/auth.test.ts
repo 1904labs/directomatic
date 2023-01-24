@@ -1,5 +1,6 @@
 import { authCheck } from '../src/auth';
 import { setupGlobal } from './setupJest';
+import { RequestLike } from 'itty-router';
 
 setupGlobal();
 

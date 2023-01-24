@@ -40,7 +40,7 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "itty-router": "^2.6.6"
+    "itty-router": "^3.0.11"
   },
   "jest": {
     "automock": false,
