@@ -1,7 +1,7 @@
 name = "directomatic"
 workers_dev = true
 main = "src/index.ts"
-compatibility_date = "2022-10-31"
+compatibility_date = "2022-11-30"
 
 [build]
 command = "npm install && npm run build"
