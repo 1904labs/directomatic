@@ -1,6 +1,6 @@
 {
   "name": "directomatic",
-  "version": "1.6.0-rc",
+  "version": "1.6.1",
   "description": "Redirect Generator and Transformer Robot",
   "main": "dist/worker.js",
   "scripts": {
@@ -11,8 +11,8 @@
     "start": "wrangler dev",
     "deploy": "wrangler publish"
   },
-  "author": "Taylor Smith <tsmith@cloudflare.com>",
-  "license": "Internal Use Only",
+  "author": "Marc Brooks <idisposable@gmail.com>",
+  "license": "MIT",
   "eslintConfig": {
     "root": true,
     "extends": [
@@ -21,7 +21,7 @@
     ]
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230221.0",
+    "@cloudflare/workers-types": "^4.20230228.0",
     "@types/jest": "^29.4.0",
     "@types/service-worker-mock": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.54.0",

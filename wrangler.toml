@@ -9,5 +9,5 @@ command = "npm install && npm run build"
 [vars]
 GSHEETS_API_ENDPOINT = "https://sheets.googleapis.com/v4/spreadsheets"
 CF_API_ENDPOINT = "https://api.cloudflare.com/client/v4"
-DEFAULT_DEST_DOMAIN = "https://www.cloudflare.com"
+DEFAULT_DEST_DOMAIN = "https://1904labs.com"
 DEFAULT_LOCALE = "en-US"
