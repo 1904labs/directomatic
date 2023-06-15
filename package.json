@@ -1,6 +1,6 @@
 {
   "name": "directomatic",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "Redirect Generator and Transformer Robot",
   "main": "dist/worker.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "eslint --max-warnings=0 src && prettier --check '*.{json,js}' 'src/**/*.{js,ts}' 'test/**/*.{js,ts}'",
     "test": "jest --config jestconfig.json --verbose",
     "start": "wrangler dev",
-    "deploy": "wrangler publish"
+    "deploy": "wrangler deploy"
   },
   "author": "Marc Brooks <idisposable@gmail.com>",
   "license": "MIT",
