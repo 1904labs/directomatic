@@ -9,7 +9,7 @@ import { RedirectCode } from './types';
  * @returns (string) original input if it is valid
  */
 export const validatePath = (input: string): string => {
-  // The only validation we want todo here non-blanks 
+  // The only validation we want todo here non-blanks
   if (input.length) {
     return input.trim();
   } else {

@@ -13,7 +13,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["@cloudflare/workers-types", "@types/jest", "@types/service-worker-mock"],
+    "types": ["@cloudflare/workers-types", "@types/jest", "@types/service-worker-mock"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "test"]

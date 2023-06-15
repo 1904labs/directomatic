@@ -86,9 +86,9 @@ export const getBulkListStatus = async (): Promise<DirectomaticResponse> => {
     errors: response.ok
       ? payload.errors
       : [
-        `Cloudflare API returned ${response.status}, ${response.statusText}`,
-        payload.errors,
-      ].flat(),
+          `Cloudflare API returned ${response.status}, ${response.statusText}`,
+          payload.errors,
+        ].flat(),
     messages: [messages, payload.messages].flat(),
   };
   return result;
@@ -174,17 +174,15 @@ export const getBulkListContents = async (): Promise<BulkRedirectListItem[]> => 
       const page = payload?.result as BulkRedirectListItem[];
 
       if (page?.length) {
-        page.forEach(item => list.push(item));
+        page.forEach((item) => list.push(item));
       }
 
       const after = payload?.result_info?.cursors?.after || '';
 
       if (after !== '') {
         cursor = `?cursor=${after}`;
-      }
-      else break;
-    }
-    else break;
+      } else break;
+    } else break;
   } while (cursor !== '');
 
   return list;
